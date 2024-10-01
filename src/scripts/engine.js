@@ -5,7 +5,7 @@ const state ={
         scoreBox: document.getElementById("score_points")
     },
     cardSprites:{
-        avatar: document.getElementById("card-image"),
+        avatar: document.getElementById("card_image"),
         name: document.getElementById("card-name"),
         type: document.getElementById("card-type"),
     },
@@ -19,11 +19,11 @@ const state ={
 };
 
 const playerSides = {
-    player1: " player-field-card",
-    computer: " computer-field-card",
+    player1: "player-cards",  
+    computer: "computer-cards",
 }
 
-const pathImages = ".src/assets/icons/"
+const pathImages = "./src/assets/icons/"
 
 
 const cardData = [
@@ -55,7 +55,7 @@ const cardData = [
         id:3,
         nome: "HErcules Beetle",
         type: "Paper",
-        img: `${pathImages}Hercules.png`,
+        img: `${pathImages}hercules.png`,
         winOf:["Rock"],
         LoseOf: ["Scissors"],
     },
@@ -63,7 +63,7 @@ const cardData = [
         id:4,
         name: "Ressurrection",
         type: "Scissors",
-        img: `${pathImages}ressurrection.png`,
+        img: `${pathImages}ressurreica  o.png`,
         winOf:["Paper"],
         LoseOf: ["Rock"],
     },
@@ -85,8 +85,8 @@ async function getRandomCardId(){
 async function createcardImage(IdCard, fieldSide){
     const cardImage = document.createElement("img");
     cardImage.setAttribute("height","100px");
-    cardImage.setAttribute("src","./src/assets/icons/card-back.png");
-    cardImage.setAttribute("data-id","IdCard");
+    cardImage.setAttribute("src",`${pathImages}card-back.png`);
+    cardImage.setAttribute("data-id",IdCard);
     cardImage.classList.add("card");
 
 
@@ -102,8 +102,31 @@ async function createcardImage(IdCard, fieldSide){
     });
 
     return cardImage;
-
 }
+
+async function drawSelectCard(index){
+    state.cardSprites.avatar.src = cardData[index].img;
+    state.cardSprites.name.innerText = cardData[index].name;
+    state.cardSprites.type.innerText = "Attibute : " + cardData[index].type;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function drawCards(cardNumbers, fieldSide){
     for(let i = 0; i < cardNumbers; i++){

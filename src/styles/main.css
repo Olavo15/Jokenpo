@@ -79,7 +79,6 @@
 }
 
 .card-box__container{
-    margin-top: 0.02rem;
     height: 100vh;
     display: flex;
     flex-direction: column;

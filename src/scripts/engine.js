@@ -91,7 +91,38 @@ const cardData = [
         winOf: ["Paper"],
         loseOf: ["Rock"],
     },
-    
+    {
+        id: 8,
+        name: "Leviata",
+        type: "Rock",
+        img: `${pathImages}leviata.png`,
+        winOf: ["Scissors"],
+        loseOf: ["Paper"],
+    },
+    {
+        id: 9,
+        name: "Magician of black chaos",
+        type: "Scissors",
+        img: `${pathImages}magoCaosNegro.png`,
+        winOf: ["Paper"],
+        loseOf: ["Rock"],
+    },
+    {
+        id: 10,
+        name: "Mammoth",
+        type: "Rock",
+        img: `${pathImages}mammoth.png`,
+        winOf: ["Scissors"],
+        loseOf: ["Paper"],
+    },
+    {
+        id: 11,
+        name: "Mask of shine & Dark",
+        type: "Paper",
+        img: `${pathImages}mascaraTrevasLuz.png`,
+        winOf: ["Rock"],
+        loseOf: ["Scissors"],
+    }
 ];
 
 function getRandomCardId() {
@@ -132,12 +163,20 @@ async function setCardsField(cardId) {
     state.fieldCards.player.style.display = "block";
     state.fieldCards.computer.style.display = "block";
 
+    await hiddencardDetails();
+
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
 
     let duelResults = await checkDuelResults(cardId, computerCardId);
     await updateScore();
     await drawButton(duelResults);
+}
+
+async function hiddencardDetails(){
+    state.cardSprites.avatar.src = "";
+    state.cardSprites.name.innerText = "";
+    state.cardSprites.type.innerText = "";
 }
 
 async function checkDuelResults(playerCardId, computerCardId) {
@@ -152,7 +191,7 @@ async function checkDuelResults(playerCardId, computerCardId) {
     } else if (playerCard.loseOf.includes(computerCard.type)) {
         duelResults = "lose";
         state.score.computerScore++;
-    }
+    }    
 
     await playAudio(duelResults);
     return duelResults;
@@ -167,6 +206,7 @@ async function drawButton(text) {
 async function updateScore() {
     state.score.scoreBox.innerText = `Win: ${state.score.playerScore} | Lose: ${state.score.computerScore}`;
 }
+
 
 function removeAllCards() {
     let cards = state.playerSides.computerBox;
@@ -206,7 +246,6 @@ async function playAudio(checkDuelResults) {
 }
 
 function init() {
-    state.score.playerScore = 0;
     drawCards(5, state.playerSides.player1);
     drawCards(5, state.playerSides.computer);
 }

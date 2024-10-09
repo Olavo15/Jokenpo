@@ -128,10 +128,6 @@
     border: 1px solid #ffff;
     border-radius: 8px;
 }
-.card-infield > img {
-    border: none;
-}
-
 .card{
     transition: transform 0.2s;
 }

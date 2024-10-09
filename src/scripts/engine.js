@@ -160,6 +160,7 @@ async function setCardsField(cardId) {
 
     let computerCardId = getRandomCardId();
 
+
     state.fieldCards.player.style.display = "block";
     state.fieldCards.computer.style.display = "block";
 
@@ -171,6 +172,11 @@ async function setCardsField(cardId) {
     let duelResults = await checkDuelResults(cardId, computerCardId);
     await updateScore();
     await drawButton(duelResults);
+}
+async function  showHiddenCardFieldsImages(value) {
+    if(value === true){
+        state.fieldCards
+    }    
 }
 
 async function hiddencardDetails(){
@@ -246,6 +252,9 @@ async function playAudio(checkDuelResults) {
 }
 
 function init() {
+    state.fieldCards.player.style.display = "none";
+    state.fieldCards.computer.style.display = "none";
+
     drawCards(5, state.playerSides.player1);
     drawCards(5, state.playerSides.computer);
 }
